@@ -21,8 +21,7 @@ class SettingsCtrl {
 		this.isSubmitting = true;
 		this._User.update(this.formData).then(
 			(user) => {
-				console.log('Success!');
-				this.isSubmitting = false;
+				this._$state.go('app.profile', {username:user.username});
 			},
 			(err) => {
 				this.isSubmitting = false;
