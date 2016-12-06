@@ -13,4 +13,20 @@ export default class Profile {
 			metgod: 'GET'
 		}).then((res) => res.data.profile);
 	}
+
+	// follow a user
+	follow(username) {
+		return this._$http({
+			url: this._AppConstants.api + '/profiles/' + username + '/follow',
+			method: 'POST'
+		}).then((res) => res.data);
+	}
+
+	// unfollow a user
+	unfollow(username) {
+		return this._$http({
+			url: this._AppConstants.api + '/profiles/' + username + '/follow',
+			method: 'DELETE'
+		}).then((res) => res.data);
+	}
 }
