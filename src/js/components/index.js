@@ -12,6 +12,9 @@ componentsModule.component('followBtn', FollowBtn);
 import ArticleMeta from './article-helpers/article-meta.component';
 componentsModule.component('articleMeta', ArticleMeta);
 
+import FavoriteBtn from './buttons/favorite-btn.component';
+componentsModule.component('favoriteBtn', FavoriteBtn);
+
 import ShowAuthed from './show-authed.directive';
 componentsModule.directive('showAuthed', ShowAuthed);
 
