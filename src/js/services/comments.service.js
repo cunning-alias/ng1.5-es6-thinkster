@@ -14,4 +14,20 @@ export default class Comments {
 			data: {comment: {body: payload } }
 		}).then((res) => res.data.comment);
 	}
+
+	// delete a comment from an article
+	destroy(commentId, articleSlug) {
+		return this._$http({
+			url: `${this._AppConstants.api}/articles/${articleSlug}/comments/${commentId}`,
+			method: 'DELETE'
+		});
+	}
+
+	// Get all comments
+	getAll(slug) {
+		return this._$http({
+			url: `${this._AppConstants.api}/articles/${slug}/comments`,
+			method: 'GET'
+		}).then((res) => res.data.comments);
+	}
 }

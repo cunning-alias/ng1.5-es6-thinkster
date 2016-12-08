@@ -15,6 +15,11 @@ class ArticleCtrl {
     // transform the markdown into HTML
     this.article.body = $sce.trustAsHtml(marked(this.article.body, {sanitize: true}));
 
+    // get comments for this article
+    Comments.getAll(this.article.slug).then(
+    	(comments) => this.comments = comments
+    );
+
     // Initialize blank comment form
     this.resetCommentForm();
 
@@ -31,9 +36,10 @@ class ArticleCtrl {
   addComment() {
   	this.commentForm.isSubmitting = true;
 
+  	// Need to make request to server here
   	this._Comments.add(this.article.slug, this.commentForm.body).then(
   		(comment) => {
-  			console.log(comment);
+  			this.comments.unshift(comment);
   			this.resetCommentForm();
   		},
   		(err) => {
@@ -41,6 +47,13 @@ class ArticleCtrl {
   			this.commentForm.errors = err.data.errors;
   		}
   	);
+  }
+
+  deleteComment(commentId, index) {
+  	this._Comments.destroy(commentId, this.article.slug).then(
+  		(success) => {
+  			this.comments.splice(index, 1);
+  		})
   }
 }
 
